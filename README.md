@@ -35,8 +35,17 @@ Detects angry customer emails with Claude and escalates them to senior support a
 
 ## Architecture
 
-Open the [visual project page](./index.html#architecture) for the flow derived from the sanitized export.
+The diagram below represents the sanitized template flow. External services, credentials, and environment-specific identifiers must be configured before execution.
 
+```mermaid
+flowchart TD
+    A["Email webhook"] --> B["Parse sender, subject, and body"]
+    B --> C["Claude sentiment classification"]
+    C --> D{"Sentiment"}
+    D -->|ANGRY| E["Alert senior support in Slack"]
+    D -->|ANGRY| F["Send apology and fast-response email"]
+    D -->|NEUTRAL or HAPPY| G["Send standard acknowledgement"]
+```
 
 ## Workflow
 
